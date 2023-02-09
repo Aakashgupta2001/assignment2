@@ -1,17 +1,13 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Controller, Get, Post, Body } from '@nestjs/common';
 import { AppService } from './app.service';
+import { PositionDto } from './dto/position.dto';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
-  }
-
   @Post()
-  Position(): string {
-    return this.appService.Position();
+  Position(@Body() positionDTO: PositionDto): string[] {
+    return this.appService.Position(positionDTO);
   }
 }
